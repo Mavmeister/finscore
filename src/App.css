@@ -23,3 +23,8 @@
   position: fixed;
   bottom: 0;
   width: 50%; }
+
+h2 {
+  font-size: large;
+  margin: auto;
+  padding-left: 1%; }

@@ -6,7 +6,7 @@ import Card from 'react-md/lib/Cards/Card';
 import Paper from 'react-md/lib/Papers';
 import SelectionControl from 'react-md/lib/SelectionControls'
 import Radio from 'react-md/lib/SelectionControls/Radio';
-import Util from './Util'
+import Header from './components/Header'
 
 import './App.css';
 
@@ -126,8 +126,10 @@ class App extends Component {
       </div>
       }
     return (
+      <div>
+      <Header />
           <form className="form-container md-grid md-cell--12" onSubmit={this._handleSubmit}>
-                <Paper zDepth={4} className= "md-grid"> Pesonal Finance Score Card
+                <Paper zDepth={4} className= "md-grid">
                 <Card className="md-grid md-cell md-cell--12"> 
                   <TextField className="md-cell md-cell--12"
                     onChange={this._handleChange}
@@ -155,9 +157,8 @@ class App extends Component {
                     type="switch"
                     label="Do you have a 401k?"
                     name="has_401k"/>
-                    {Component401k}
-                    {ComponentRetirement}
-
+                  {Component401k}
+                  {ComponentRetirement}
                 </Card>
                 <Card className="other-accounts md-grid md-cell md-cell--6">
                   <SelectionControl name="has_other_account" className="md-cell md-cell--12" type="switch" label="Do you have any other accounts?" onChange={this._toggleOther} />
@@ -182,7 +183,7 @@ class App extends Component {
                 iconClassName="fa fa-hand-paper-o" 
                 type="submit" />
           </form>
-
+      </div>
     );
   }
 }

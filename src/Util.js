@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import TextField from 'react-md/lib/TextFields';
 import FontIcon from 'react-md/lib/FontIcons';
 
-
 const Util = {
 	_toggleDebt(){
       console.log("im toggling debt")
