@@ -20,13 +20,13 @@ class App extends Component {
         yearly_contribution_401k: '',
         has_401k: false,
         has_other_retirement: false,
+        has_debt: false,
+        has_other_account: false,
         other_yearly_contribution: '',
         total_checking_savings: '',
-        has_debt: false,
         company_1: '',
         amount_1: '',
         rate_1: '',
-        has_other_account: false,
         other_name: '',
         other_amount: ''
       };
@@ -94,12 +94,6 @@ class App extends Component {
       this.setState(prevState => ({
         has_401k: !prevState.has_401k
       }))
-      let toggle401k = 
-        <div>
-        <TextField name="company_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Company name?" onChange={this._handleChange}/>
-        <TextField name="amount_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this._handleChange}/>
-        <TextField name="rate_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Rate %" onChange={this._handleChange}/>
-        </div>
     }
 
     _toggleRetirement(){
@@ -107,7 +101,7 @@ class App extends Component {
       this.setState(prevState => ({
         has_other_retirement: !prevState.has_other_retirement
       }))
-      let toggle401k = 
+      let toggleRetire = 
         <div>
         <TextField name="company_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Company name?" onChange={this._handleChange}/>
         <TextField name="amount_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this._handleChange}/>
@@ -120,7 +114,7 @@ class App extends Component {
       this.setState(prevState => ({
         has_other_account: !prevState.has_other_account
       }))
-      let toggle401k = 
+      let toggleOther = 
         <div>
         <TextField name="company_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Company name?" onChange={this._handleChange}/>
         <TextField name="amount_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this._handleChange}/>
@@ -130,9 +124,41 @@ class App extends Component {
 
 
   render() {
+    let Component401k = null;
+    let ComponentOther = null;
+    let ComponentRetirement = null;
+    let ComponentDebt = null;
+
+    if (this.state.has_401k){
+      Component401k = <div className="yes-401k md-grid md-cell--12">
+        <TextField name="yearly_contribution_401k" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
+          <SelectionControl className="md-cell md-cell--12" name="has_other_retirement" type="switch" label="Other retirement accounts?" onChange={this._toggleRetirement} />
+      </div>
+        if (this.state.has_other_retirement){
+        ComponentRetirement = <TextField className="md-cell md-cell--12" name="other_yearly_contribution" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
+        }
+      } 
+
+    if (this.state.has_other_account){
+      ComponentOther = <div>
+        <TextField name="other_name" className="md-cell md-cell--12" leftIcon={<FontIcon>attach_money</FontIcon>} label="Who is it with?" onChange={this._handleChange} />
+        <TextField name="other_amount" className="md-cell md-cell--12" leftIcon={<FontIcon>attach_money</FontIcon>} label="How much?" onChange={this._handleChange} />
+      </div>
+      }
+
+    if (this.state.has_debt){
+      ComponentDebt = <div className="added-debt md-grid md-cell--12">
+        <TextField name="company_1" className="md-cell md-cell--5" leftIcon={<FontIcon>attach_money</FontIcon>} label="Company name?" onChange={this._handleChange}/>
+        <TextField name="amount_1" className="md-cell md-cell--3" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this._handleChange}/>
+        <TextField name="rate_1" className="md-cell md-cell--2" leftIcon={<FontIcon>attach_money</FontIcon>} label="Rate %" onChange={this._handleChange}/>
+        <Button flat className="md-cell md-cell--2 md-cell--middle"><FontIcon>clear</FontIcon></Button>
+        <Button className="md-cell md-cell--1" raised secondary label="Add" onClick={this._addDebt} />
+      </div>
+      }
+
     return (
           <form className="form-container md-grid md-cell--12" onSubmit={this._handleSubmit}>
-                <Paper zDepth={4} className= "md-grid">
+                <Paper zDepth={4} className= "md-grid"> Pesonal Finance Score Card
                 <Card className="md-grid md-cell md-cell--12"> 
                   <TextField className="md-cell md-cell--12"
                     onChange={this._handleChange}
@@ -160,16 +186,13 @@ class App extends Component {
                     type="switch"
                     label="Do you have a 401k?"
                     name="has_401k"/>
-                    <div className="yes-401k md-grid md-cell--12">
-                      <TextField name="yearly_contribution_401k" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
-                      <SelectionControl className="md-cell md-cell--12" name="has_other_retirement" type="switch" label="Other retirement accounts?" onChange={this._toggleRetirement} />
-                      <TextField className="md-cell md-cell--12" name="other_yearly_contribution" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
-                    </div>
+                    {Component401k}
+                    {ComponentRetirement}
+
                 </Card>
                 <Card className="other-accounts md-grid md-cell md-cell--6">
                   <SelectionControl name="has_other_account" className="md-cell md-cell--12" type="switch" label="Do you have any other accounts?" onChange={this._toggleOther} />
-                  <TextField name="other_name" className="md-cell md-cell--12" leftIcon={<FontIcon>attach_money</FontIcon>} label="Who is it with?" onChange={this._handleChange} />
-                  <TextField name="other_amount" className="md-cell md-cell--12" leftIcon={<FontIcon>attach_money</FontIcon>} label="How much?" onChange={this._handleChange} />
+                  {ComponentOther}
                 </Card>
                 <Card className="total-checking md-grid md-cell md-cell--12" >
                   <TextField className="md-cell md-cell--12" onChange={this._handleChange}
@@ -181,13 +204,7 @@ class App extends Component {
                 </Card>
                 <Card className="debt md-grid md-cell md-cell--12 md-cell--middle">
                   <SelectionControl name="has_debt" className="md-cell md-cell--12" type="switch" label="Do you have any debt?" onChange={this._toggleDebt} />
-                  <div className="added-debt md-grid md-cell--12">
-                    <TextField name="company_1" className="md-cell md-cell--5" leftIcon={<FontIcon>attach_money</FontIcon>} label="Company name?" onChange={this._handleChange}/>
-                    <TextField name="amount_1" className="md-cell md-cell--3" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this._handleChange}/>
-                    <TextField name="rate_1" className="md-cell md-cell--2" leftIcon={<FontIcon>attach_money</FontIcon>} label="Rate %" onChange={this._handleChange}/>
-                    <Button flat className="md-cell md-cell--2 md-cell--middle"><FontIcon>clear</FontIcon></Button>
-                  </div>
-                  <Button className="md-cell md-cell--1" raised secondary label="Add" onClick={this._addDebt} />
+                  {ComponentDebt}
                 </Card>
               </Paper>
               <Button className="btn-submit hi md-cell md-cell--12" 
