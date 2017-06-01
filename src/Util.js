@@ -5,6 +5,7 @@ import FontIcon from 'react-md/lib/FontIcons';
 const Util = {
 	_toggleDebt(){
       console.log("im toggling debt")
+      
       this.setState(prevState => ({
         has_debt: !prevState.has_debt
       }))

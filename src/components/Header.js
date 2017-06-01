@@ -16,7 +16,7 @@ class Header extends Component {
     // add menu
     return (
       <div>
-        <h2> Personal Finance Score card </h2>
+        <h2 className="md-cell md-cell--12"> Personal Finance Score card </h2>
       </div>
       )
   }

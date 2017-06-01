@@ -7,6 +7,7 @@ import Paper from 'react-md/lib/Papers';
 import SelectionControl from 'react-md/lib/SelectionControls'
 import Radio from 'react-md/lib/SelectionControls/Radio';
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 import './App.css';
 
@@ -15,7 +16,7 @@ class App extends Component {
       super(props, context);
 
       this.state = {
-        pre_tax_income: '23,429',
+        pre_tax_income: '',
         total_monthly_expenses: '',
         yearly_contribution_401k: '',
         has_401k: false,
@@ -102,10 +103,10 @@ class App extends Component {
     let ComponentDebt = null;
 
     if (this.state.has_401k){
-      Component401k = <div className="yes-401k md-grid md-cell--12">
-        <TextField name="yearly_contribution_401k" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
-          <SelectionControl className="md-cell md-cell--12" name="has_other_retirement" type="switch" label="Other retirement accounts?" onChange={this._toggleRetirement} />
-      </div>
+      Component401k = <div className="md-grid">
+        <TextField className="yes-401k md-grid md-cell--12" name="yearly_contribution_401k" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
+          <SelectionControl className="md-cell md-cell--12" id="y_retire"  name="has_other_retirement" type="switch" label="Other retirement accounts?" onChange={this._toggleRetirement} />
+        </div>
         if (this.state.has_other_retirement){
         ComponentRetirement = <TextField className="md-cell md-cell--12" name="other_yearly_contribution" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
         }
@@ -117,6 +118,7 @@ class App extends Component {
       </div>
       }
     if (this.state.has_debt){
+
       ComponentDebt = <div className="added-debt md-grid md-cell--12">
         <TextField name="company_1" className="md-cell md-cell--5" leftIcon={<FontIcon>attach_money</FontIcon>} label="Company name?" onChange={this._handleChange}/>
         <TextField name="amount_1" className="md-cell md-cell--3" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this._handleChange}/>
@@ -126,10 +128,10 @@ class App extends Component {
       </div>
       }
     return (
-      <div>
+      <div className="md-grid">
       <Header />
           <form className="form-container md-grid md-cell--12" onSubmit={this._handleSubmit}>
-                <Paper zDepth={4} className= "md-grid">
+                <Paper zDepth={4} className= "paper-container md-grid">
                 <Card className="md-grid md-cell md-cell--12"> 
                   <TextField className="md-cell md-cell--12"
                     onChange={this._handleChange}
@@ -153,7 +155,7 @@ class App extends Component {
                 </Card>
 
                 <Card className='401k md-grid md-cell md-cell--6'>
-                  <SelectionControl className="md-cell md-cell--12" onChange={this._toggle401k}
+                  <SelectionControl className="md-cell md-cell--12" id="y401k" onChange={this._toggle401k}
                     type="switch"
                     label="Do you have a 401k?"
                     name="has_401k"/>
@@ -161,7 +163,7 @@ class App extends Component {
                   {ComponentRetirement}
                 </Card>
                 <Card className="other-accounts md-grid md-cell md-cell--6">
-                  <SelectionControl name="has_other_account" className="md-cell md-cell--12" type="switch" label="Do you have any other accounts?" onChange={this._toggleOther} />
+                  <SelectionControl name="has_other_account" className="md-cell md-cell--12" id="y_otheracct" type="switch" label="Do you have any other accounts?" onChange={this._toggleOther} />
                   {ComponentOther}
                 </Card>
                 <Card className="total-checking md-grid md-cell md-cell--12" >
@@ -173,7 +175,7 @@ class App extends Component {
                     errorText="This is an example of some error message." />
                 </Card>
                 <Card className="debt md-grid md-cell md-cell--12 md-cell--middle">
-                  <SelectionControl name="has_debt" className="md-cell md-cell--12" type="switch" label="Do you have any debt?" onChange={this._toggleDebt} />
+                  <SelectionControl name="has_debt" className="md-cell md-cell--12" id="debt" type="switch" label="Do you have any debt?" onChange={this._toggleDebt} />
                   {ComponentDebt}
                 </Card>
               </Paper>
@@ -183,6 +185,7 @@ class App extends Component {
                 iconClassName="fa fa-hand-paper-o" 
                 type="submit" />
           </form>
+          <Footer className="md-cell md-cell--12 md-cell--middle" />
       </div>
     );
   }
