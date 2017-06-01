@@ -50,7 +50,6 @@ class App extends Component {
       e.preventDefault()
       console.log(this.completeForm)
     }
-
     _handleChange(value, event) {
       console.log(value, event)
       const target = event.target
@@ -59,22 +58,12 @@ class App extends Component {
       console.log("Setting " ,name, " to ", value)
       this.setState({ [name]: value })
     }
-
     _toggleDebt(){
       console.log("im toggling debt")
       this.setState(prevState => ({
         has_debt: !prevState.has_debt
       }))
-      console.log(this.state.has_debt)
-
-      let newDebt = 
-        <div>
-        <TextField name="company_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Company name?" onChange={this._handleChange}/>
-        <TextField name="amount_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this._handleChange}/>
-        <TextField name="rate_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Rate %" onChange={this._handleChange}/>
-        </div>
     }
-
     _addDebt(){
       console.log("ive added debt")
       let newDebt = 
@@ -84,44 +73,27 @@ class App extends Component {
         <TextField name="rate_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Rate %" onChange={this._handleChange}/>
         </div>
     }
-
     _removeDebt(index){
       console.log("removing debt", {index})
     }
-
     _toggle401k(){
       console.log("ive toggled 401k")
       this.setState(prevState => ({
         has_401k: !prevState.has_401k
       }))
     }
-
     _toggleRetirement(){
       console.log("ive toggled retire")
       this.setState(prevState => ({
         has_other_retirement: !prevState.has_other_retirement
       }))
-      let toggleRetire = 
-        <div>
-        <TextField name="company_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Company name?" onChange={this._handleChange}/>
-        <TextField name="amount_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this._handleChange}/>
-        <TextField name="rate_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Rate %" onChange={this._handleChange}/>
-        </div>
     }    
-
     _toggleOther(){
       console.log("ive toggled retire")
       this.setState(prevState => ({
         has_other_account: !prevState.has_other_account
       }))
-      let toggleOther = 
-        <div>
-        <TextField name="company_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Company name?" onChange={this._handleChange}/>
-        <TextField name="amount_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this._handleChange}/>
-        <TextField name="rate_1" className="md-cell md-cell--4" leftIcon={<FontIcon>attach_money</FontIcon>} label="Rate %" onChange={this._handleChange}/>
-        </div>
     }
-
 
   render() {
     let Component401k = null;
@@ -138,14 +110,12 @@ class App extends Component {
         ComponentRetirement = <TextField className="md-cell md-cell--12" name="other_yearly_contribution" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
         }
       } 
-
     if (this.state.has_other_account){
       ComponentOther = <div>
         <TextField name="other_name" className="md-cell md-cell--12" leftIcon={<FontIcon>attach_money</FontIcon>} label="Who is it with?" onChange={this._handleChange} />
         <TextField name="other_amount" className="md-cell md-cell--12" leftIcon={<FontIcon>attach_money</FontIcon>} label="How much?" onChange={this._handleChange} />
       </div>
       }
-
     if (this.state.has_debt){
       ComponentDebt = <div className="added-debt md-grid md-cell--12">
         <TextField name="company_1" className="md-cell md-cell--5" leftIcon={<FontIcon>attach_money</FontIcon>} label="Company name?" onChange={this._handleChange}/>
@@ -155,7 +125,6 @@ class App extends Component {
         <Button className="md-cell md-cell--1" raised secondary label="Add" onClick={this._addDebt} />
       </div>
       }
-
     return (
           <form className="form-container md-grid md-cell--12" onSubmit={this._handleSubmit}>
                 <Paper zDepth={4} className= "md-grid"> Pesonal Finance Score Card
