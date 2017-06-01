@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import TextField from 'react-md/lib/TextFields';
+import Button from 'react-md/lib/Buttons/Button';
 import FontIcon from 'react-md/lib/FontIcons';
 import Paper from 'react-md/lib/Papers';
 import SelectionControl from 'react-md/lib/SelectionControls'
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -11,31 +11,41 @@ class App extends Component {
       super(props, context);
 
       this.state = {
-        value: '',
+        amount: '',
         other_amount: '',
         name: '',
-        new_input: ''
+        new_input: '',
+        fourK: true
       };
 
       this.completeForm = {}
 
       this._handleChange = this._handleChange.bind(this);
+      this._handleSubmit = this._handleSubmit.bind(this);
     }
 
+    _handleSubmit(event){
+      let data = this.completeForm;
+      data = (this.state)
+      event.preventDefault()
+      console.log(data)
+    }
 
-  _handleChange(value, event) {
-    const target = event.target
-    const name = target.name
-    // console.log("T", target, "N", name)
-    this.setState({ [name]: value })
-  }
+    _handleChange(value, event) {
+      // console.log(value, event)
+      const target = event.target
+      const name = target.name
+      // console.log("T", target, "N", name)
+      console.log("Setting " ,name, " to ", value)
+      this.setState({ [name]: value })
+    }
 
 
   render() {
     return (
       <div className="App md-grid">
         <Paper zDepth={4} className= "md-cell--top">
-          <form className="react-form md-grid">
+          <form className="react-form md-grid" onSubmit={this._handleSubmit}>
           <TextField 
             onChange={this._handleChange}
             name="other_amount"
@@ -63,20 +73,15 @@ class App extends Component {
           />
           <hr />
           <SelectionControl className="md-cell md-cell--12"
+                onChange={this._handleChange}
                 id="lights"
                 type="switch"
                 label="Do you have a 401k?"
-                name="lights"
-          />
-          <SelectionControl className="md-cell md-cell--12"
-                id="lights"
-                type="switch"
-                label="Do you have a 401k?"
-                name="lights"
+                name="fourK"
           />
           <TextField 
                     onChange={this._handleChange}
-                    value={this.state.value}
+                    value={this.state.amount}
                     name="amount"
                     id="errorTitle"
                     label="Enter your total amount..."
@@ -86,7 +91,7 @@ class App extends Component {
                     className="md-cell md-cell--12"
           
           />
-          Money: {this.state.value}
+          <Button className="md-cell md-cell--2" raised secondary iconBefore={false} label="Submit FinScore" iconClassName="fa fa-hand-paper-o" type="submit" />
           </form>
         </Paper>
       </div>

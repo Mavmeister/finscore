@@ -1,5 +1,8 @@
 @import 'globals';
 
+$md-primary-color: $md-indigo-500;
+$md-secondary-color: $md-indigo-a-200;
+
 @include react-md-everything;
 
 body {
