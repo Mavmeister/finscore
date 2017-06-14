@@ -21,14 +21,14 @@ class App extends Component {
       super(props, context);
       this.initialState = {
         hasNotSubmitted: false,
-        pre_tax_income: 20000,
+        pre_tax_income: 179000,
         total_monthly_expenses: 3000,
-        yearly_contribution_401k: 2000,
+        yearly_contribution_401k: 20,
         has_401k: true,
         has_other_retirement: false,
         has_debt: true,
         has_other_account: false,
-        other_yearly_contribution: '',
+        other_yearly_contribution: 15,
         total_checking_savings: 19000,
         company_1: 'Bone Thugs',
         amount_1: 100,
@@ -161,7 +161,7 @@ class App extends Component {
       // let DebtComponent = <Debt handleChange={this._toggleDebt} debtCount={this.state.numDebt} addDebt={this._addDebt} />
       let Component401k = 
         <div className="md-grid">
-          <TextField className="yes-401k md-grid md-cell--12" id='y_contrib401' name="yearly_contribution_401k" type="number" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
+          <TextField className="yes-401k md-grid md-cell--12" id='y_contrib401' name="yearly_contribution_401k" type="number" leftIcon={<FontIcon>toys</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
           <SelectionControl className="md-cell md-cell--12" id="y_retire"  name="has_other_retirement" type="switch" label="Other retirement accounts?" onChange={this._toggleRetirement} />
           <Collapse collapsed={!this.state.has_other_retirement}>
             <TextField className="md-cell md-cell--12" type="number" name="other_yearly_contribution" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>

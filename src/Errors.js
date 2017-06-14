@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Errors = {
 	savingsTooLow: 'You should have at least 3 months worth of your total expenses in savings',

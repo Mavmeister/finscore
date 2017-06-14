@@ -16,13 +16,11 @@ class Review extends Component {
     this.state = { 
       visible: false,
       checksaveMessage: '',
-      retirementMessages: '',
+      retirementMessage: '',
       otherRetirementMessage: '',
       investmentMessage: '',
       debtMessage: '',
     };
-
-    this._calculateScore = this._calculateScore.bind(this)
 
   }
 
@@ -32,6 +30,8 @@ class Review extends Component {
 
   componentDidMount(){
     this._calculateCheckingSavings()
+    this._calculate401k()
+    this._calculateOtherRetirement()
 
   }
 
@@ -59,23 +59,39 @@ class Review extends Component {
     this.setState({ [name]: value })
   }
 
-  _calculateScore(data){
+  _calculate401k(){
+    let salary = this.props.formData.pre_tax_income
+    let rate = this.props.formData.yearly_contribution_401k
+    let product = ( (rate / 100) * salary)
+    console.log("401K", salary, rate, product)
+    if (rate < 10 && salary < 180000){
+      this.setState({retirementMessage: Errors.fourKlow})
+    }
+    if (rate > 10 && salary < 180000 && product <= 18000){
+      this.setState({retirementMessage: Errors.fourKonTrack})
+    }
+    if (rate > 10 && salary < 180000 && product > 18000){
+      this.setState({retirementMessage: Errors.fourKhigh})
+    }
+  }
+
+  _calculateOtherRetirement(){
+    let amount = (this.props.formData.other_yearly_contribution / 100) * this.props.formData.pre_tax_income
+    console.log("Other Retirement:", amount)
   }
 
   _calculateCheckingSavings(){
-    let pre_tax_income = this.props.formData.pre_tax_income
     let expenses = { total: this.props.formData.total_monthly_expenses,
                      low: (this.props.formData.total_monthly_expenses * 3),
                      high: (this.props.formData.total_monthly_expenses * 6),
                     }
     let checksave = this.props.formData.total_checking_savings
-
-      if (expenses.low >= checksave){
-      this.setState({checksaveMessage: Errors.savingsTooLow})
-      }
-      if (expenses.high < checksave){
-      this.setState({checksaveMessage: Errors.savingsTooHigh})
-      }
+    if (expenses.low >= checksave){
+    this.setState({checksaveMessage: Errors.savingsTooLow})
+    }
+    if (expenses.high < checksave){
+    this.setState({checksaveMessage: Errors.savingsTooHigh})
+    }
   }
 
 
@@ -99,6 +115,7 @@ class Review extends Component {
         >
           <div className='modal'>
             <li>Checking and Savings: {this.state.checksaveMessage}</li>
+            <li>401k: {this.state.retirementMessage}</li>
           </div>
         </Dialog>
       </div>
