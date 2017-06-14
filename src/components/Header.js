@@ -15,7 +15,7 @@ class Header extends Component {
     // add progress bar
     // add menu
     return (
-      <div>
+      <div className="md-grid md-cell md-cell--12">
         <h2 className="md-cell md-cell--12"> Personal Finance Score card </h2>
       </div>
       )

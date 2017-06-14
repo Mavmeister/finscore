@@ -24,6 +24,10 @@ hr {
   width: 25%;
 }
 
+.modal {
+  width: auto;
+}
+
 TextField {
 	height: 10px;
 }
@@ -34,4 +38,15 @@ TextField {
 .md-text-field--help {
 	font-size: 20px;
 	float: right;
+}
+label {
+	font-size: 50px;
+}
+.md-selection-control-label {
+	font-size: 1.5vw;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
