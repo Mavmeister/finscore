@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Button from 'react-md/lib/Buttons/Button';
 import FontIcon from 'react-md/lib/FontIcons';
 import '../App.css';
 

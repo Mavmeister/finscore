@@ -6,7 +6,6 @@ import FontIcon from 'react-md/lib/FontIcons';
 import Card from 'react-md/lib/Cards/Card';
 import Paper from 'react-md/lib/Papers';
 import SelectionControl from 'react-md/lib/SelectionControls'
-import Radio from 'react-md/lib/SelectionControls/Radio';
 import Collapse from 'react-md/lib/Helpers/Collapse';
 
 import Header from './components/Header'
@@ -19,6 +18,7 @@ import './App.css';
 class App extends Component {
   constructor(props, context) {
       super(props, context);
+
       this.initialState = {
         hasNotSubmitted: false,
         pre_tax_income: 179000,
@@ -70,18 +70,21 @@ class App extends Component {
       this._toggleRetirement = this._toggleRetirement.bind(this);
       this._toggleOther = this._toggleOther.bind(this);
       this._reviewToggle = this._reviewToggle.bind(this);
+
     }
+      componentWillMount(){
+        this._handleSubmit()
+      }
 
     _reviewToggle(value){
       console.log('submitted and disabled')
 
     }
   
-    _handleSubmit(e){
+    _handleSubmit(){
       let data = this.initialState
       this.completeForm = data
       // map some more companies 
-      e.preventDefault()
       console.log("COMPLETE DATA", this.completeForm)
       this.setState({hasNotSubmitted: false})
     }
@@ -164,19 +167,18 @@ class App extends Component {
           <TextField className="yes-401k md-grid md-cell--12" id='y_contrib401' name="yearly_contribution_401k" type="number" leftIcon={<FontIcon>toys</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
           <SelectionControl className="md-cell md-cell--12" id="y_retire"  name="has_other_retirement" type="switch" label="Other retirement accounts?" onChange={this._toggleRetirement} />
           <Collapse collapsed={!this.state.has_other_retirement}>
-            <TextField className="md-cell md-cell--12" type="number" name="other_yearly_contribution" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
+            <TextField className="md-cell md-cell--12" id='other-retirement' type="number" name="other_yearly_contribution" leftIcon={<FontIcon>attach_money</FontIcon>} label="What is your yearly contribution rate?" onChange={this._handleChange}/>
           </Collapse>
         </div>
       let ComponentOther = 
         <div>
-          <TextField name="other_name" className="md-cell md-cell--12" leftIcon={<FontIcon>account_balance</FontIcon>} label="Institution name?" onChange={this._handleChange} />
-          <TextField name="other_amount" className="md-cell md-cell--12" type="number" leftIcon={<FontIcon>attach_money</FontIcon>} label="How much?" onChange={this._handleChange} />
+          <TextField name="other_name" className="md-cell md-cell--12" id='other-name' leftIcon={<FontIcon>account_balance</FontIcon>} label="Institution name?" onChange={this._handleChange} />
+          <TextField name="other_amount" className="md-cell md-cell--12" id='other-amount' type="number" leftIcon={<FontIcon>attach_money</FontIcon>} label="How much?" onChange={this._handleChange} />
         </div>
     return (
       <div className="md-grid">
       <Header />
-       {!this.state.hasNotSubmitted && <Review formData={this.completeForm} /> }
-       {this.state.hasNotSubmitted && 
+       <Review formData={this.completeForm} />
         <div className="md-grid md-cell md-cell--12">
           <form className="form-container md-grid md-cell--12" onSubmit={this._handleSubmit}>
                 <Paper zDepth={4} className= "paper-container md-grid">
@@ -222,6 +224,7 @@ class App extends Component {
                 </Card>
                 <Card className="total-checking md-grid md-cell md-cell--12" >
                   <TextField className="md-cell md-cell--12" onChange={this._handleChange}
+                    id='total-checking'
                     type="number"
                     name="total_checking_savings"
                     label="Total checking and savings amount"
@@ -244,7 +247,7 @@ class App extends Component {
           </form>
           <Footer className="md-cell md-cell--12 md-cell--middle" />
         </div>
-        }                
+                    
       </div>
     );
   }
