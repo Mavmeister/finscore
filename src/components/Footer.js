@@ -3,7 +3,7 @@ import Button from 'react-md/lib/Buttons/Button';
 import TextField from 'react-md/lib/TextFields';
 import Card from 'react-md/lib/Cards/Card';
 import FontIcon from 'react-md/lib/FontIcons';
-import '../App.css';
+import '../components/App/App.css';
 
 class Footer extends Component {
   constructor(props, context) {

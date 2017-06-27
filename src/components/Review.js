@@ -5,9 +5,9 @@ import Card from 'react-md/lib/Cards/Card';
 import Paper from 'react-md/lib/Papers';
 import Dialog from 'react-md/lib/Dialogs';
 
-import Errors from '../Errors.js'
+import Errors from '../constants/Errors.js'
 
-import '../App.css';
+import '../components/App/App.css';
 
 class Review extends Component {
   constructor(props) {
