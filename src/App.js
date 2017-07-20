@@ -9,7 +9,7 @@ import SelectionControl from 'react-md/lib/SelectionControls'
 import Collapse from 'react-md/lib/Helpers/Collapse';
 
 import Header from './components/Header'
-import Footer from './components/Footer'
+// import Footer from './components/Footer'
 import Review from './components/Review'
 import Debt from './components/Debt'
 
@@ -98,7 +98,7 @@ class App extends Component {
     }
     _toggleDebt(){
       console.log("im toggling debt", this.state.has_debt)
-      let hasDebt = this.state.numDebt > 0 ? true :  false
+      let hasDebt = this.state.numDebt > 0 ? true : false
       this.setState(prevState => ({
         has_debt: !prevState.has_debt,
 
@@ -115,10 +115,12 @@ class App extends Component {
       debts.push(debtItem)
       console.log("ive added debt")
       console.log(debts)
+      console.log("Debt count:", this.state.numDebt)
       this.setState({
           numDebt: this.state.numDebt + 1,
           debtData: debts
       });
+      console.log(this._debtCount())
     }
     _removeDebt(index){
       console.log("removing debt", this.state.numDebt)
@@ -149,6 +151,11 @@ class App extends Component {
       }))
     }
 
+    _debtCount(){
+      let count = this.state.numDebt;
+      return count++;
+    }
+
   render() {
       let newDebt = this.state.debtData.map((debt) => {
         return <Debt handleChange={this._handleChange} key={this.state.numDebt} debtCount={this.state.numDebt} removeDebt={this._removeDebt} />
@@ -156,7 +163,7 @@ class App extends Component {
 
       let DebtComponent = 
       <div> 
-        <Debt handleChange={this._handleChange} key={this.state.numDebt} debtCount={this.state.numDebt} removeFirstDebt={this._toggleDebt} />
+        <Debt handleChange={this._handleChange} key={this.state.debtCount} debtCount={this.state.numDebt} removeFirstDebt={this._toggleDebt} />
         {newDebt}
         <Button className="md-cell md-cell--1" raised secondary label="Add" onClick={this._addDebt} />
       </div>
@@ -245,7 +252,6 @@ class App extends Component {
                 iconClassName="fa fa-hand-paper-o" 
                 type="submit" />
           </form>
-          <Footer className="md-cell md-cell--12 md-cell--middle" />
         </div>
                     
       </div>

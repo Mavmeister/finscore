@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FontIcon from 'react-md/lib/FontIcons';
+// import FontIcon from 'react-md/lib/FontIcons';
 import '../App.css';
 
 class Header extends Component {

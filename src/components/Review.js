@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Button from 'react-md/lib/Buttons/Button';
-import FontIcon from 'react-md/lib/FontIcons';
-import Card from 'react-md/lib/Cards/Card';
-import Paper from 'react-md/lib/Papers';
+// import FontIcon from 'react-md/lib/FontIcons';
+// import Card from 'react-md/lib/Cards/Card';
+// import Paper from 'react-md/lib/Papers';
 import Dialog from 'react-md/lib/Dialogs';
 
 import Errors from '../Errors.js'

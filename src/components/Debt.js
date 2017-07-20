@@ -32,9 +32,9 @@ class Debt extends React.Component {
     render () {
         return (
             <div className="added-debt md-grid md-cell--12">
-              <TextField name="company_1" className="md-cell md-cell--5" type="text"leftIcon={<FontIcon>account_balance</FontIcon>} label="Company name?" onChange={this.props.handleChange}/>
-              <TextField name="amount_1" className="md-cell md-cell--3" type="number" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this.props.handleChange}/>
-              <TextField name="rate_1" className="md-cell md-cell--2" type="number" leftIcon={<FontIcon>toys</FontIcon>} label="Rate %" onChange={this.props.handleChange}/>
+              <TextField name="company_1" id="debt-company" className="md-cell md-cell--5" type="text"leftIcon={<FontIcon>account_balance</FontIcon>} label="Company name?" onChange={this.props.handleChange}/>
+              <TextField name="amount_1" id="debt-amount" className="md-cell md-cell--3" type="number" leftIcon={<FontIcon>attach_money</FontIcon>} label="Amount?" onChange={this.props.handleChange}/>
+              <TextField name="rate_1" id="debt-rate" className="md-cell md-cell--2" type="number" leftIcon={<FontIcon>toys</FontIcon>} label="Rate %" onChange={this.props.handleChange}/>
               <Button flat className="md-cell md-cell--2 md-cell--middle" onClick={this.xClick} ><FontIcon>clear</FontIcon></Button>
             </div>
         );
