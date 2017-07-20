@@ -5,15 +5,15 @@ import Button from 'react-md/lib/Buttons/Button';
 // import Paper from 'react-md/lib/Papers';
 import Dialog from 'react-md/lib/Dialogs';
 
-import Errors from '../Errors.js'
+import Errors from '../constants/Errors.js'
 
-import '../App.css';
+import '../components/App/App.css';
 
 class Review extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { 
+    this.state = {
       visible: false,
       checksaveMessage: "You're doing great! Keep up the savings",
       checksaveColor: 'green',
@@ -26,7 +26,7 @@ class Review extends Component {
       investmentDebtMessage: '',
       investmentDebtColor: '',
       debtMessage: '',
-      debtColor:'', 
+      debtColor:'',
     };
 
   }
@@ -124,7 +124,7 @@ class Review extends Component {
 
   _calculateDebt(debt){
     let debtRate = (this.props.formData.rate_1)
-    debtRate >= 5 ? this.setState({debtMessage: Errors.debtHigh, checksaveColor: 'red'}) : 
+    debtRate >= 5 ? this.setState({debtMessage: Errors.debtHigh, checksaveColor: 'red'}) :
                    this.setState({debtMessage: Errors.debtLow, checksaveColor: 'green'})
   }
 
@@ -182,7 +182,7 @@ class Review extends Component {
 
             {this.props.formData.has_debt &&
             <div>
-              <span> 
+              <span>
                Debt: {this.props.formData.rate_1}% </span>
                <p> {this.state.debtMessage} </p>
             </div>}
